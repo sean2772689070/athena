@@ -8,11 +8,11 @@ import { resolve } from 'node:path';
 // https://vitejs.dev/config
 // 使用异步函数定义 Vite 配置，便于动态导入插件
 export default defineConfig(async () => {
-  // 动态导入 Vue 插件并获取默认导出
+  // 动态导入 Vue 插件并获取默认导出，用于 Vite 支持 Vue 单文件组件
   const vue = (await import('@vitejs/plugin-vue')).default;
-  // 动态导入 Tailwind CSS 插件并获取默认导出
+  // 动态导入 Tailwind CSS 插件并获取默认导出，用于 Vite 支持 Tailwind CSS 处理
   const tailwindcss = (await import('@tailwindcss/vite')).default;
-  // 动态导入自动引入插件并获取默认导出
+  // 动态导入自动引入插件并获取默认导出，用于自动按需引入 Vue、Pinia、Vue Router、Vue I18n 和 VueUse 等库
   const autoImport = (await import('unplugin-auto-import/vite')).default;
 
   return {
@@ -56,8 +56,8 @@ export default defineConfig(async () => {
       // 设置路径别名，方便代码中引用
       alias: {
         '@common': resolve(__dirname, 'common'),
-        '@renderer': resolve(__dirname, 'renderer'),
         '@main': resolve(__dirname, 'main'),
+        '@renderer': resolve(__dirname, 'renderer'),
         '@locales': resolve(__dirname, 'locales'),
       }
     }

@@ -8,6 +8,7 @@ import { createI18n, type I18nOptions } from 'vue-i18n'
 async function createI18nInstance() {
     // 配置 i18n 选项
     const options: I18nOptions = {
+        legacy: false, // 禁用 legacy 模式，使用 Composition API
         // 默认语言设置为中文
         locale: 'zh',
         // 预加载的语言包
@@ -26,7 +27,7 @@ async function createI18nInstance() {
 }
 
 // 调用异步函数创建 i18n 实例并导出，供其他模块使用
-export const i18n = createI18nInstance()
+export const i18n = await createI18nInstance()
 
 // 默认导出 i18n 实例，方便在需要时统一引入
 export default i18n
