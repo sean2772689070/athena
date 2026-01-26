@@ -1,8 +1,8 @@
 {
-  "name": "electron-demo",
-  "productName": "electron-demo",
+  "name": "athena",
+  "productName": "athena",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Athena is a chatbot that can help you with your questions.",
   "main": ".vite/build/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -12,8 +12,8 @@
   },
   "keywords": [],
   "author": {
-    "name": "EricWXY",
-    "email": "ericwxy@foxmail.com"
+    "name": "sean2772689070",
+    "email": "seanhyg2772689070@gmail.com"
   },
   "license": "MIT",
   "devDependencies": {
