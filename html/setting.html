@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- 声明文档类型为 HTML5，确保浏览器以标准模式渲染页面 -->
+<html>
+  <head>
+    <!-- 设置字符编码为 UTF-8，支持多语言字符集，防止中文乱码 -->
+    <meta charset="UTF-8" />
+    <!-- 配置内容安全策略（CSP）：仅允许加载同源脚本，防止 XSS 攻击 -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+  </head>
+  <body>
+    <!-- 应用挂载点：前端框架（如 Vue/React）将在此处渲染整个应用 -->
+    <div id="app"></div>
+    <!-- 以 ES Module 方式加载主入口脚本，使用相对路径指向 renderer 目录下的 index.ts -->
+    <script type="module" src="../renderer/index.ts"></script>
+  </body>
+</html>
