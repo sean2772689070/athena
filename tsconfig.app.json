@@ -25,14 +25,17 @@
 
 		"baseUrl": "./",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@common/*": ["./common/*"],
+			"@renderer/*": ["./renderer/*"],
+			"@main/*": ["./main/*"],
+			"@locales/*": ["./locales/*"]
 		}
 	},
 	"include": [
 		"forge.env.d.ts",
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"src/**/*.d.ts"
-, "renderer/App.vue", "preload.ts", "main/main.ts"	]
+		"renderer/**/*.tsx",
+		"renderer/**/*.vue",
+		"**/*.ts",
+		"**/*.d.ts"
+	]
 }

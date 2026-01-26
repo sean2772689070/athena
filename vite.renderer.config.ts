@@ -3,7 +3,7 @@ import { defineConfig, type CSSOptions } from 'vite';
 // 引入 Node.js 的 path 模块中的 resolve 方法，用于解析文件路径
 import { resolve } from 'node:path';
 // 引入 unplugin-auto-import 插件，用于自动按需引入 Vue 等库
-import autoImport from 'unplugin-auto-import/vite';
+// import autoImport from 'unplugin-auto-import/vite';
 
 // https://vitejs.dev/config
 // 使用异步函数定义 Vite 配置，便于动态导入插件
@@ -12,6 +12,8 @@ export default defineConfig(async () => {
   const vue = (await import('@vitejs/plugin-vue')).default;
   // 动态导入 Tailwind CSS 插件并获取默认导出
   const tailwindcss = (await import('@tailwindcss/vite')).default;
+  // 动态导入自动引入插件并获取默认导出
+  const autoImport = (await import('unplugin-auto-import/vite')).default;
 
   return {
     // 注册插件：Vue 支持 和 Tailwind CSS 支持
