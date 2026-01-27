@@ -5,6 +5,12 @@ interface WindowApi {
     onWindowMaximized: (callback: (isMaximized: boolean) => void) => void;
     isWindowMaximized: () => Promise<boolean>;
 
+    logger: {
+        info: (msg: string, ...meta: any[]) => void;
+        error: (msg: string, ...meta: any[]) => void;
+        debug: (msg: string, ...meta: any[]) => void;
+        warn: (msg: string, ...meta: any[]) => void;
+    }
 }
 
 // 使用 declare 是为了告诉 TypeScript：这里对 Window 的扩展属于“环境声明”，

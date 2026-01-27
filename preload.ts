@@ -17,6 +17,14 @@ const api: WindowApi = {
         ipcRenderer.on(IPC_EVENTS.MAXIMIZE_WINDOW + 'back', (_, isMaximized) => callback(isMaximized)),
     // 使用 invoke 而非 send：需要主进程立即返回当前窗口是否最大化，避免监听/广播带来的时序与清理复杂度
     isWindowMaximized: () => ipcRenderer.invoke(IPC_EVENTS.IS_WINDOW_MAXIMIZED),
+    
+    // 向主进程发送“日志记录”事件，主进程收到后记录日志
+    logger: {
+        info: (msg: string, ...meta: any[]) => ipcRenderer.send(IPC_EVENTS.LOG_INFO, msg, ...meta),
+        error: (msg: string, ...meta: any[]) => ipcRenderer.send(IPC_EVENTS.LOG_ERROR, msg, ...meta),
+        debug: (msg: string, ...meta: any[]) => ipcRenderer.send(IPC_EVENTS.LOG_DEBUG, msg, ...meta),
+        warn: (msg: string, ...meta: any[]) => ipcRenderer.send(IPC_EVENTS.LOG_WARN, msg, ...meta),
+    }
 };
 
 // 通过 contextBridge 把 api 对象注入到渲染进程的全局 window 对象上，

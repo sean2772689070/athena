@@ -14,6 +14,7 @@ import { IPC_EVENTS } from '@common/constants'
 import { BrowserWindow, BrowserWindowConstructorOptions, IpcMainInvokeEvent, type IpcMainEvent, ipcMain } from 'electron'
 // 引入 Node.js 路径模块
 import path from 'path'
+import logManager from './LogService'
 
 /**
  * 窗口尺寸配置接口
@@ -65,6 +66,7 @@ class WindowService {
      */
     private constructor() {
         this._setupIPcEvents()
+        logManager.info('WindowService initialized successfully');
     }
 
     /**
@@ -136,7 +138,7 @@ class WindowService {
      * 设置窗口生命周期监听
      * 包括窗口关闭清理、resize 防抖通知渲染进程
      */
-    private _setupWinLifecycle(window: BrowserWindow, _name: WindowNames){
+    private _setupWinLifecycle(window: BrowserWindow, name: WindowNames){
         // 防抖函数：窗口 resize 时通知渲染进程当前是否可最大化
         const updateWinStatus = debounce(() => !window?.isDestroyed()
             && window?.webContents?.send(IPC_EVENTS.MAXIMIZE_WINDOW + 
@@ -146,6 +148,7 @@ class WindowService {
         window.once('closed', () => {
             window.destroy();
             window?.removeListener('resize', updateWinStatus);
+            logManager.info(`Window closed: ${name}`);
         });
 
         // 监听 resize 事件，触发防抖更新
