@@ -85,6 +85,7 @@ class LogService {
 
         log.transports.file.level = 'debug';
 
+        this._setupIpcEvent();
         this.info('LogService initialized successfully');
 
         this._cleanupOldLogs();
