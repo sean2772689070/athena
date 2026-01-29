@@ -17,6 +17,16 @@ const api: WindowApi = {
         ipcRenderer.on(IPC_EVENTS.MAXIMIZE_WINDOW + 'back', (_, isMaximized) => callback(isMaximized)),
     // 使用 invoke 而非 send：需要主进程立即返回当前窗口是否最大化，避免监听/广播带来的时序与清理复杂度
     isWindowMaximized: () => ipcRenderer.invoke(IPC_EVENTS.IS_WINDOW_MAXIMIZED),
+
+    // 设置主题模式：向主进程发送“设置主题模式”事件，并等待主进程返回设置结果
+    setThemeMode: (mode: ThemeMode) => ipcRenderer.invoke(IPC_EVENTS.SET_THEME_MODE, mode),
+    // 获取当前主题模式：向主进程发送“获取主题模式”事件，并返回当前主题模式值
+    getThemeMode: () => ipcRenderer.invoke(IPC_EVENTS.GET_THEME_MODE),
+    // 判断当前是否为暗黑主题：向主进程发送“是否为暗黑主题”事件，并返回布尔值结果
+    isDarkTheme: () => ipcRenderer.invoke(IPC_EVENTS.IS_DARK_THEME),
+    // 监听系统主题变化：当主进程广播“主题模式已更新”事件时，将暗黑状态参数透传给前端传入的回调函数
+    onSystemThemeChange: (callback: (isDark: boolean) => void) =>
+        ipcRenderer.on(IPC_EVENTS.THEME_MODE_UPDATED, (_, isDark) => callback(isDark)),
     
     // 向主进程发送“日志记录”事件，主进程收到后记录日志
     logger: {
