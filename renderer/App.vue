@@ -2,19 +2,20 @@
 import {NConfigProvider} from 'naive-ui';
 import TitleBar from '@renderer/components/TitleBar.vue';
 import DragRegion from '@renderer/components/DragRegion.vue';
+import NavBar from './components/NavBar.vue';
 
-onMounted(async () => {
-  console.log('App mounted');
-  await nextTick();
-  throw new Error('Test error');
-})
 
 </script>
 <template>
-  <n-config-provider class="h-[100vh] w-[100vw] flex">
+  <n-config-provider class="h-full w-full flex text-tx-primary">
 
-    <aside class="h-full flex flex-shrink-0 flex-col bg-red-400 w-[200px]">
-      Aside
+    <aside class="sidebar h-full flex flex-shrink-0 flex-col bg-red-400 w-[320px]">
+      <div class="flex-auto flex">
+        <nav-bar />
+        <div class="flex-auto">
+          conversation-list
+        </div>
+      </div>
     </aside>
     <div class="flex-auto">
       <title-bar title="Athena">
@@ -25,3 +26,10 @@ onMounted(async () => {
     </div>
   </n-config-provider>
 </template>
+
+<style scoped>
+.sidebar {
+    background-color: var(--bg-color);
+    box-shadow: -3px -2px 10px rgba(101, 101, 101, 0.2);
+}
+</style>

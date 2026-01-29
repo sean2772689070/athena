@@ -15,6 +15,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, IpcMainInvokeEvent, typ
 // 引入 Node.js 路径模块
 import path from 'path'
 import logManager from './LogService'
+import { nativeTheme } from 'electron'
 
 /**
  * 窗口尺寸配置接口
@@ -38,6 +39,8 @@ const SHARED_WINDOW_OPTIONS = {
     titleBarStyle: 'hidden',
     // 窗口默认标题
     title: 'Athena',
+    darkTheme: nativeTheme.shouldUseDarkColors,
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#2C2C2C' : '#FFFFFF',
     webPreferences: {
         // 允许在渲染进程中使用 Node.js
         nodeIntegration: false,
