@@ -84,8 +84,12 @@ class LogService {
         log.transports.file.maxSize = 1024 * 1024 * 10; // 10MB
 
         log.transports.file.level = 'debug';
-
+        //设置IPC事件
         this._setupIpcEvent();
+        //重写console.log等函数，将日志写入文件
+        this._rewriteConsoleLog();
+
+
         this.info('LogService initialized successfully');
 
         this._cleanupOldLogs();
